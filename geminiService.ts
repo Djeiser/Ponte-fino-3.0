@@ -38,7 +38,7 @@ Basándote en toda esta información, responde a las preguntas del usuario.
 `;
 
 
-async function* streamGeminiResponse(history: ChatMessage[], newMessage: string): AsyncGenerator<string> {
+export async function* streamGeminiResponse(history: ChatMessage[], newMessage: string): AsyncGenerator<string> {
     const userMessage: ChatMessage = { role: "user", parts: [{ text: newMessage }] };
     
     let historyForApi = [...history];
@@ -70,7 +70,7 @@ async function* streamGeminiResponse(history: ChatMessage[], newMessage: string)
     }
 }
 
-async function* streamAnalyzeSensation(sensation: string): AsyncGenerator<string> {
+export async function* streamAnalyzeSensation(sensation: string): AsyncGenerator<string> {
     const prompt = `Como asistente virtual de fisioterapia, un usuario con discopatía lumbar describe una sensación: "${sensation}". Tu tarea es ofrecer una sugerencia de apoyo, segura y no médica. Puedes sugerir enfocarte en la técnica, reducir el peso, realizar un calentamiento específico (como Gato-Camello), o recordar la regla de 'dolor por debajo de 3/10'. No diagnostiques. Enmarca tu respuesta como un consejo útil a considerar. Sé breve (máx 60 palabras) y usa un tono tranquilizador.`;
 
     try {
@@ -89,5 +89,3 @@ async function* streamAnalyzeSensation(sensation: string): AsyncGenerator<string
         yield "He tenido un problema de conexión. ¿Podrías intentarlo de nuevo?";
     }
 }
-
-export { streamGeminiResponse, streamAnalyzeSensation };
